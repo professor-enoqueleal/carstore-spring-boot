@@ -45,4 +45,11 @@ public class CarServiceImpl implements CarService {
 
     }
 
+    @Override
+    public CarDTO findById(String id) {
+
+        return dao.findById(id);
+
+    }
+
 }

@@ -47,17 +47,18 @@ public class HomeController {
 
     @GetMapping("/cars")
     public String getCars(Model model) {
+
         List<CarDTO> allCars = service.findAll();
+
         model.addAttribute("cars", allCars);
+
         return "dashboard";
     }
 
     @GetMapping("/cars/edit")
     public String editCar(@RequestParam("id") String id, Model model) {
 
-//        CarDTO car = service.findById(id);
-
-        CarDTO car = new CarDTO();
+        CarDTO car = service.findById(id);
 
         if (car == null) {
 
