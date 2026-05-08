@@ -23,23 +23,7 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("carDTO", new CarDTO());
-        return "index";
-    }
-
-    @PostMapping("/cars")
-    public String createCar(CarDTO carDTO, BindingResult result) {
-
-        if (carDTO.getId() != null && !carDTO.getId().isBlank()) {
-
-            service.update(carDTO.getId(), carDTO);
-
-        } else {
-
-            service.save(carDTO);
-
-        }
+    public String index() {
 
         return "redirect:/cars";
 
@@ -52,34 +36,7 @@ public class HomeController {
 
         model.addAttribute("cars", allCars);
 
-        return "dashboard";
-    }
-
-    @GetMapping("/cars/edit")
-    public String editCar(@RequestParam("id") String id, Model model) {
-
-        CarDTO car = service.findById(id);
-
-        if (car == null) {
-
-            return "redirect:/cars";
-
-        }
-        model.addAttribute("carDTO", car);
-
-        return "index";
-
-    }
-
-    @PostMapping("/cars/delete")
-    public String deleteCar(@RequestParam("id") String id, Model model) {
-
-        service.deleteById(id);
-
-        List<CarDTO> cars = service.findAll();
-        model.addAttribute("cars", cars);
-
-        return "redirect:/cars";
+        return "public/dashboard";
 
     }
 
