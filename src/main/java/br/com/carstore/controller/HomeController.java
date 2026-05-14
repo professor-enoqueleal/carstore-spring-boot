@@ -40,4 +40,16 @@ public class HomeController {
 
     }
 
+    @GetMapping("/detail")
+    public String getDetail(Model model, @RequestParam String id) {
+
+        CarDTO carDTO = service.findById(id);
+
+        // Adiciona o DTO obtido ao model para que o template possa mostrar os valores
+        model.addAttribute("car", carDTO);
+
+        return "public/detail";
+
+    }
+
 }
